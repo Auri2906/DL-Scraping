@@ -3,33 +3,32 @@ import time
 from selenium.webdriver.common.keys import Keys
 import requests
 import json
-from lxml import html
-import urllib.request
 
-print("Application Started..........\n Warning : plz minimize chrome and only open it while seeing captcha")  
+
+##please change the Driver Directory as per your System path
 driver = webdriver.Chrome("C:\\Users\\DELL\\Desktop\\chromedriver_win32\\chromedriver.exe") 
  
   
- 
+ ##Loading of website
 driver.get("https://parivahan.gov.in/rcdlstatus/?pur_cd=101")
 
+##input for Driver License No
 str = input("Enter Driving License No.: ")
-driver.find_element_by_name("form_rcdl:tf_dlNO").send_keys(str)  
-time.sleep(1)  
+driver.find_element_by_name("form_rcdl:tf_dlNO").send_keys(str)   
 
+##Input for DOB
 str = input("Enter DOB: ")
-driver.find_element_by_name("form_rcdl:tf_dob_input").send_keys(str)  
-time.sleep(1)  
+driver.find_element_by_name("form_rcdl:tf_dob_input").send_keys(str)   
 
-str = input("Enter CaptchaID : ")
+##Imput for captcha
+str = input("Enter Captcha : ")
 driver.find_element_by_name("form_rcdl:j_idt34:CaptchaID").send_keys(str)  
-time.sleep(1)  
-
 
 driver.find_element_by_name("form_rcdl:j_idt46").send_keys(Keys.ENTER)  
-time.sleep(1)
+time.sleep(3)
 
 
+##using Xpath to fetching the required data and storing them in different Variables 
 status = driver.find_element_by_xpath('//*[@id="form_rcdl:j_idt118"]/table[1]/tbody/tr[1]/td[2]/span').text
 name = driver.find_element_by_xpath('//*[@id="form_rcdl:j_idt118"]/table[1]/tbody/tr[2]/td[2]').text
 doi = driver.find_element_by_xpath('//*[@id="form_rcdl:j_idt118"]/table[1]/tbody/tr[3]/td[2]').text
